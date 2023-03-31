@@ -108,13 +108,115 @@ return 0;
 
 } 
 
+int question(){
+    int correct, fail; //맞은 수,틀린수 출력
+    int select; //입력한 숫자
+    correct=0; fail=0;
+    while (1){ //1번 문제
+    printf("1번 문제 우리 기수는 KOSTA 258기이다.\n");
+    printf("맞으면 1번 틀리면 2번을 눌러주세요! \n");
+    scanf("%d",&select);
+    
+    if (select==1){
+        fail=++fail;
+        printf("오답입니다! \n현재 맞춘 문제: %d, 틀린 문제 %d\n", correct,fail);
+        break;
+    }
+    else if (select==2)
+    {
+        correct=++correct;
+        printf("정답입니다! \n현재 맞춘 문제: %d, 틀린 문제 %d\n",correct,fail);
+        break;
+    }
+    else
+    {
+        printf("잘못된 입력입니다  다시 입력해주세요! \n");
+    }
+    }
+
+    while (1) //2번 문제
+    {
+        printf("강사님 성함은 '한경일' 이다.\n");
+        printf("맞으면 1번 틀리면 2번을 눌러주세요! \n");
+        scanf("%d",&select);
+        if (select==1){
+        correct=++correct;
+        printf("정답입니다! \n현재 맞춘 문제: %d, 틀린 문제 %d\n", correct,fail);
+        break;
+        }
+        else if (select==2)
+        {
+            fail=++fail;
+            printf("오답입니다! \n현재 맞춘 문제: %d, 틀린 문제 %d\n",correct,fail);
+            break;
+        }
+        else
+        {
+            printf("잘못된 입력입니다  다시 입력해주세요! \n");
+        }
+    }
+    
+
+}
+
+ 
+void Multiplication() //3번 문제
+{
+      int firstnum, secondnum, answer, result;
+      int count = 0;
+
+while (1)
+      {
+      srand((unsigned)time(NULL));
+      firstnum = rand() % 9 + 1;
+      secondnum = rand() % 9 + 1;
+
+      result = firstnum * secondnum;
+      printf("%d * %d =", firstnum, secondnum);
+      scanf("%d", &answer);
+
+            if (answer == result)
+            {
+                  printf("%d번 정답을 맞추셨습니다.\n\n\n", count+1);
+                  ++count;
+            }
+
+            else
+            {
+                  printf("오답입니다.\n");
+                  printf("정답은 %d 입니다.\n\n", result);
+            }
+
+            if (count == 5)
+            {
+                  printf("5문제 모두 맞추셨습니다. 축하합니다!\n\n\n");
+                  break;
+            }
+      }
+}
+
+
+
+
+      
+
+
 int main(){
     int number;
-    printf("가위바위보 하고싶으면 1을 입력해주세요");
+    printf("게임을 선택하세요! \n");
+    printf("1 : 가위바위보 2: 객관식 문제 3: 구구단\n");
     scanf("%d",&number);
     if (number==1){
     RSP();    
     }
-    
+    else if( number ==2)
+    {
+        question();
+    }
+    else if (number ==3) 
+    {
+            Multiplication();
+      }
+
 }
 
