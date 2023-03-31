@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <time.h>
+void main() {
+    srand(time(NULL));
+ 
+    char word[5][7]= { "grapes", "citron", "cherry", "orange", "banana" };
+    
+    char* answer = word[rand() % 5];
+    char blind[]= "______";
+    char input;
+    int try; //횟수
+    int key;
+
+    int j; // j==글자수
+    int chance=3;
+ 
+
+    while (1) {
+        try = 0;
+        key = 0;
+ 
+        printf("%s : ", blind);
+        scanf(" %c", &input);
+ 
+        // 입력 단어가 정답 문장에 있는지 확인
+        for (int i = 0; i < 6; i++) {
+            if (input == blind[i]) {
+                key = 1;
+                printf("이미 등록한 문자입니다!! 재입력하세요!! \n");
+                break;
+            }
+            else if (input == answer[i]) {
+                blind[i] = input;
+                try++;
+            }
+        }
+ 
+        // 이미 등록한 문자라면 재입력 받아주기
+        if (key == 1) {
+            continue;
+        }
+ 
+        // 하나도 없으면 목숨 1개 잃음. 3개 잃으면 게임 오버
+        if (try == 0) {
+            chance--;
+            printf("기회가 %d번 남았습니다\n",chance);
+            if (chance == 0) {
+                printf("실패\n");
+                break;
+            }
+        }
+ 
+        // 모든 단어를 다 맞췄다면 정답을 출력하고 종료
+        if (strcmp(blind, answer) == 0) {
+            printf("%s\n", blind);
+            printf("정답");
+            break;
+        }
+    }
+ 
+}
