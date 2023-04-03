@@ -1,7 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h> // rand 함수 사용
-#include <time.h>	  // 시간을 통해 랜덤 사용
+#include <string.h>
+#include <time.h> // 시간을 통해 랜덤 사용
 
 int RSP(int life)
 {
@@ -10,9 +11,7 @@ int RSP(int life)
 
 	int user; // 사용자가 낸 값을 저장합니다.
 
-	int result[3] = {
-	    0,
-	}; // 게임의 결과를 저장합니다.  result 배열의 모든 요소를 0으로 초기화합니다.
+	int result[3] = {0}; // 게임의 결과를 저장합니다.  result 배열의 모든 요소를 0으로 초기화합니다.
 
 	int cnt = 0; // 게임의 횟수를 저장합니다. 0으로 초기화합니다.
 
@@ -21,13 +20,12 @@ int RSP(int life)
 	printf("총 5판을 진행하고 승리가 더 많아야 다음게임으로 이동이 가능합니다 ㅎㅎㅎㅎ\n\n");
 	printf("컴퓨터한테 지는 바보는 없겠죠 ㅎㅎ?? \n");
 	printf("지금 바로 시작합니다! enter키를 눌러주세요~ \n");
-	printf("%d", life);
 	getchar();
 	while (1) // 사용자가 종료할 때 까지 반복합니다.
 
 	{
 
-		com = rand() % 3 + 1; // 1~3 값 중 하나를 저장합니다.
+		com = 3; // rand() % 3 + 1; // 1~3 값 중 하나를 저장합니다.
 
 		printf("(1. 가위 _ 2. 바위 _ 3. 보 )\n\n");
 
@@ -94,6 +92,7 @@ int RSP(int life)
 		{
 			printf("총 5판을 진행했습니다.\n");
 			printf("%d전 %d승 %d무 %d패\n\n", cnt, result[0], result[1], result[2]);
+			printf("오! 컴퓨터를 이기셨군요!\n");
 			printf("\n게임하시느라 고생많았습니다. 다음게임으로 이동합니다 \n");
 			return life;
 		}
@@ -103,6 +102,7 @@ int RSP(int life)
 			printf("컴퓨터한테 지셨네요 ㅋ\n");
 			cnt = 0;
 			life--; // 목숨 -1하도록하기
+			printf("현재 당신의 목숨은 %d 입니다.\n", life);
 			result[0] = 0;
 			result[1] = 0;
 			result[2] = 0;
@@ -116,7 +116,6 @@ int RSP(int life)
 			return life;
 		}
 	}
-
 	return 0;
 }
 
@@ -128,7 +127,6 @@ int question(int life)
 	fail = 0;
 
 	printf("**************** 5지선다 Quiz ****************\n\n");
-	printf("현재 당신의 목숨은 %d입니다.\n", life);
 	printf("총 5판을 진행하고 맞춘 문제가 더 많아야 다음게임으로 이동이 가능합니다 ㅎㅎㅎㅎ\n\n");
 	printf("이걸 틀리는 바보는 없겠죠 ㅎㅎ?? \n");
 	printf("지금 바로 시작합니다! enter키를 눌러주세요~ \n");
@@ -258,8 +256,9 @@ int question(int life)
 		if (correct > fail)
 		{
 			printf("총 5판을 진행했습니다.\n");
-			printf("%d문제의 정답을 맞추셨습니다.\n");
+			printf("%d문제의 정답을 맞추셨습니다.\n", correct);
 			printf("\n게임하시느라 고생많았습니다. 다음게임으로 이동합니다 \n");
+			getchar();
 			return life;
 		}
 		else if (correct < fail && life > 0)
@@ -289,7 +288,6 @@ int Multiplication(int life) // 3번 문제
 	int fail = 0;
 
 	printf("**************** 구구단 게임 ****************\n\n");
-	printf("현재 당신의 목숨은 %d입니다.\n", life);
 	printf("총 5판을 진행하고 맞춘 문제가 더 많아야 다음게임으로 이동이 가능합니다 ㅎㅎㅎㅎ\n\n");
 	printf("이걸 틀리는 바보는 없겠죠 ㅎㅎ?? \n");
 	printf("지금 바로 시작합니다! enter키를 눌러주세요~ \n");
@@ -323,7 +321,6 @@ int Multiplication(int life) // 3번 문제
 				fail++;
 				break;
 			}
-			
 		}
 
 		if (count == 5 && correct > fail)
@@ -351,6 +348,8 @@ int Multiplication(int life) // 3번 문제
 			return life;
 		}
 	}
+	getchar();
+	return 0;
 }
 
 int number_baseball(int life)
@@ -371,223 +370,381 @@ int number_baseball(int life)
 
 	int ball; // 볼의 수를 세기 위한 변수
 
+	int result = 0;
+
 	// 난수 생성 및 중복 체크
 
-	srand((unsigned)time(NULL));
-
-	for (i = 0; i < 3; i++)
-
+	while (1) // 숫자 야구 게임 시작
 	{
+		printf("**************** 숫자야구 게임 ****************\n\n");
+		printf("3자리의 숫자를 9회 안에 모두 맞추셔야합니다.\n\n");
+		printf("이걸 못하지는 않겠죠 ㅎㅎ?? \n");
+		printf("지금 바로 시작합니다! enter키를 눌러주세요~ \n");
+		getchar();
 
-		temp = (rand() % 9) + 1; // temp변수에 현재 랜덤 값을 저장
+		srand((unsigned)time(NULL));
 
-		computerBall[i] = temp; // temp값을 컴퓨터의 볼에 저장
+		for (i = 0; i < 3; i++)
 
-		for (j = 0; j < i; j++) // 현재 추가된 만큼 반복하며
+		{
 
-			if (temp == computerBall[j] && i != j) // 만약 현재 temp값과 이전에 넣은 값 중 동일한 게 있다면
+			temp = (rand() % 9) + 1; // temp변수에 현재 랜덤 값을 저장
 
-				i--; // i의 값을 줄여 다시 이전으로 돌아가도록
+			computerBall[i] = temp; // temp값을 컴퓨터의 볼에 저장
+
+			for (j = 0; j < i; j++) // 현재 추가된 만큼 반복하며
+
+				if (temp == computerBall[j] && i != j) // 만약 현재 temp값과 이전에 넣은 값 중 동일한 게 있다면
+
+					while (1) // 숫자야구 게임 시작
+					{
+
+						i--; // i의 값을 줄여 다시 이전으로 돌아가도록
+					}
+
+			printf("[%d회차 숫자야구]\n", count);
+
+			while (1) // 정상적인 숫자만 입력받기 위한 반복
+
+			{
+
+				printf("1부터 9까지의 숫자를 한번씩 입력하세요 : \n");
+
+				scanf("%d %d %d", &userBall[0], &userBall[1], &userBall[2]);
+
+				if (userBall[0] < 1 || userBall[0] > 9 || userBall[1] < 1 || userBall[1] > 9 || userBall[2] < 1 || userBall[2] > 9)
+
+				{ // 입력한 숫자가 1 ~ 9 숫자가 아니면 다시 입력받도록
+
+					printf("범위 외의 숫자를 입력하시면 안됩니다.\n");
+
+					continue;
+				}
+
+				else if (userBall[0] == userBall[1] || userBall[0] == userBall[2] || userBall[1] == userBall[2])
+
+				{ // 입력한 숫자 중에 중복된 게 있으면 다시 입력받도록
+
+					printf("중복된 숫자를 입력하시면 안됩니다.\n");
+
+					continue;
+				}
+
+				break; // 아무 문제 없을 경우 반복 종료
+			}
+
+			ball = 0;
+
+			strike = 0;
+
+			for (i = 0; i < 3; i++) // computerBall 1~3번째에 따라 각 userBall 1~3번째를 확인하기 위한 반복
+
+				for (j = 0; j < 3; j++)
+
+					if (computerBall[i] == userBall[j]) // computerBall과 userBall의 값이 같다면
+
+						if (i == j) // 같은 위치일 경우
+
+							strike++; // 스트라이크 개수 증가
+
+						else // 다른 위치일 경우
+
+							ball++; // 볼 개수 증가
+
+			// 확인한 결과를 출력
+
+			printf("[결과]스트라이크 : %d, 볼 : %d\n\n", strike, ball);
+			count++;
+
+			if (strike == 3) // 만약 스트라이크 개수가 3개이면 승리
+
+			{
+
+				printf("***** 승리했습니다. *****\n\n");
+				result = 0;
+				break;
+			}
+
+			else if (count == 9) // 만약 9회차인데도 승리하지 못하면 패배
+
+			{
+
+				printf("***** 패배했습니다.. 정답 : %d %d %d *****\n\n", computerBall[0], computerBall[1], computerBall[2]);
+				result = 1;
+				break;
+			}
+		}
+		if (result == 0)
+		{
+			printf("\n게임하시느라 고생많았습니다. 다음게임으로 이동합니다 \n");
+			return life;
+			break;
+		}
+		else if (result == 1 && life > 0)
+		{
+			life--; // 목숨 -1하도록하기
+			count = 0;
+		}
+
+		else if (result == 1 && life <= 0)
+		{
+			life--;
+			printf("당신은 죽었습니다.\n");
+			return life;
+			break;
+		}
 	}
-
-	printf("**************** 숫자야구 게임 ****************\n\n");
-	printf("현재 당신의 목숨은 %d입니다.\n", life);
-	printf("3자리의 숫자를 9회 안에 모두 맞추셔야합니다.\n\n");
-	printf("이걸 못하지는 않겠죠 ㅎㅎ?? \n");
-	printf("지금 바로 시작합니다! enter키를 눌러주세요~ \n");
 	getchar();
-
-	while (1) // 숫자야구 게임 시작
-
-	{
-
-		printf("[%d회차 숫자야구]\n", count);
-
-		while (1) // 정상적인 숫자만 입력받기 위한 반복
-
-		{
-
-			printf("1부터 9까지의 숫자를 한번씩 입력하세요 : \n");
-
-			scanf("%d %d %d", &userBall[0], &userBall[1], &userBall[2]);
-
-			if (userBall[0] < 1 || userBall[0] > 9 || userBall[1] < 1 || userBall[1] > 9 || userBall[2] < 1 || userBall[2] > 9)
-
-			{ // 입력한 숫자가 1 ~ 9 숫자가 아니면 다시 입력받도록
-
-				printf("범위 외의 숫자를 입력하시면 안됩니다.\n");
-
-				continue;
-			}
-
-			else if (userBall[0] == userBall[1] || userBall[0] == userBall[2] || userBall[1] == userBall[2])
-
-			{ // 입력한 숫자 중에 중복된 게 있으면 다시 입력받도록
-
-				printf("중복된 숫자를 입력하시면 안됩니다.\n");
-
-				continue;
-			}
-
-			break; // 아무 문제 없을 경우 반복 종료
-		}
-
-		ball = 0;
-
-		strike = 0;
-
-		for (i = 0; i < 3; i++) // computerBall 1~3번째에 따라 각 userBall 1~3번째를 확인하기 위한 반복
-
-			for (j = 0; j < 3; j++)
-
-				if (computerBall[i] == userBall[j]) // computerBall과 userBall의 값이 같다면
-
-					if (i == j) // 같은 위치일 경우
-
-						strike++; // 스트라이크 개수 증가
-
-					else // 다른 위치일 경우
-
-						ball++; // 볼 개수 증가
-
-		// 확인한 결과를 출력
-
-		printf("[결과]스트라이크 : %d, 볼 : %d\n\n", strike, ball);
-
-		if (strike == 3) // 만약 스트라이크 개수가 3개이면 승리
-
-		{
-
-			printf("***** 승리했습니다. *****\n\n");
-
-			break;
-		}
-
-		else if (count == 9) // 만약 9회차인데도 승리하지 못하면 패배
-
-		{
-
-			printf("***** 패배했습니다.. 정답 : %d %d %d *****\n\n", computerBall[0], computerBall[1], computerBall[2]);
-
-			break;
-		}
-
-		count++;
-	}
-
 	return 0;
 }
 
-int hangman()
+void hangmanpicture(int a)
 {
-	srand(time(NULL));
+	if (a == 6)
+	{
+		printf("┌────┐\n");
+		printf("│    │\n");
+		printf("│     \n");
+		printf("│     \n");
+		printf("│     \n");
+		printf("┴     \n");
+	}
+	else if (a == 5)
+	{
+		printf("┌────┐\n");
+		printf("│    │\n");
+		printf("│    o\n");
+		printf("│     \n");
+		printf("│     \n");
+		printf("┴     \n");
+	}
+	else if (a == 4)
+	{
+		printf("┌────┐\n");
+		printf("│    │\n");
+		printf("│    o\n");
+		printf("│    ┼\n");
+		printf("│     \n");
+		printf("┴     \n");
+	}
+	else if (a == 3)
+	{
+		printf("┌────┐\n");
+		printf("│    │\n");
+		printf("│    o\n");
+		printf("│    ┼-\n");
+		printf("│     \n");
+		printf("┴     \n");
+	}
+	else if (a == 2)
+	{
+		printf("┌────┐\n");
+		printf("│    │\n");
+		printf("│    o\n");
+		printf("│   -┼-\n");
+		printf("│     \n");
+		printf("┴     \n");
+	}
+	else if (a == 1)
+	{
+		printf("┌────┐\n");
+		printf("│    │ ┌────────────┐\n");
+		printf("│    o<   HELP!!!!! │\n");
+		printf("│   -┼-└────────────┘\n");
+		printf("│   ┘ \n");
+		printf("┴     \n");
+	}
+	else if (a == 0)
+	{
+		printf("┌────┐\n");
+		printf("│    │\n");
+		printf("│    o\n");
+		printf("│   -┼-\n");
+		printf("│   ┘ └\n");
+		printf("┴     \n");
+	}
+}
 
-	char word[5][7] = {"grapes", "citron", "cherry", "orange", "banana"};
+int hangman(int life)
+{
 
-	char *answer = word[rand() % 5];
 	char blind[] = "______";
 	char input;
 	int try; // 횟수
 	int key;
-
 	int j; // j==글자수
-	int chance = 12;
+	int chance = 6;
+	int result = 0;
 
 	while (1)
 	{
-		try = 0;
-		key = 0;
+		getchar();
+		printf("**************** Hangman 게임 ****************\n\n");
+		printf("단어를 맞춰주세요!\n\n");
+		printf("이걸 못하지는 않겠죠 ㅎㅎ?? \n");
+		printf("지금 바로 시작합니다! enter키를 눌러주세요~ \n");
+		getchar();
 
-		printf("%s : \n", blind);
-		printf("Hint: 과일\n");
-		scanf(" %c", &input);
+		srand(time(NULL));
 
-		// 입력 단어가 정답 문장에 있는지 확인
-		for (int i = 0; i < 6; i++)
+		char word[5][7] = {"grapes", "citron", "cherry", "orange", "banana"};
+
+		char *answer = word[rand() % 5];
+
+		while (1)
 		{
-			if (input == blind[i])
+			try = 0;
+			key = 0;
+
+			printf("%s : \n", blind);
+			printf("알파벳을 한글자씩 입력해주세요.           Hint : 과일\n");
+			scanf(" %c", &input);
+
+			// 입력 단어가 정답 문장에 있는지 확인
+			for (int i = 0; i < 6; i++)
 			{
-				key = 1;
-				printf("이미 등록한 문자입니다!! 재입력하세요!! \n");
+				if (input == blind[i])
+				{
+					key = 1;
+					printf("이미 등록한 문자입니다!! 재입력하세요!! \n");
+					hangmanpicture(chance);
+					break;
+				}
+				else if (input == answer[i])
+				{
+					blind[i] = input;
+					try++;
+				}
+			}
+
+			// 이미 등록한 문자라면 재입력 받아주기
+			if (key == 1)
+			{
+				continue;
+			}
+
+			if (try == 0)
+			{
+				chance--;
+				printf("기회가 %d번 남았습니다\n", chance);
+				hangmanpicture(chance);
+				if (chance == 0)
+				{
+					printf("실패\n");
+					result = 0;
+					break;
+				}
+			}
+
+			// 모든 단어를 다 맞췄다면 정답을 출력하고 종료
+			if (strcmp(blind, answer) == 0)
+			{
+				printf("%s\n", blind);
+				printf("정답\n\n");
+				result = 1;
 				break;
 			}
-			else if (input == answer[i])
-			{
-				blind[i] = input;
-				try++;
-			}
+		}
+		if (result == 1)
+		{
+			printf("\n게임하시느라 고생많았습니다. enter키를 눌러주세요. \n");
+			return life;
+		}
+		else if (result == 0 && life > 0)
+		{
+			printf("당신의 목숨이 1 감소하였습니다.\n");
+			printf("게임을 다시 시작합니다. ㅋ\n\n");
+			getchar();
+			chance = 6;
+			life--; // 목숨 -1하도록하기
 		}
 
-		// 이미 등록한 문자라면 재입력 받아주기
-		if (key == 1)
+		else if (result == 0 && life <= 0)
 		{
-			continue;
-		}
-
-		// 하나도 없으면 목숨 1개 잃음. 3개 잃으면 게임 오버
-		if (try == 0)
-		{
-			chance--;
-			printf("기회가 %d번 남았습니다\n", chance);
-			if (chance == 0)
-			{
-				printf("실패\n");
-				break;
-			}
-		}
-
-		// 모든 단어를 다 맞췄다면 정답을 출력하고 종료
-		if (strcmp(blind, answer) == 0)
-		{
-			printf("%s\n", blind);
-			printf("정답");
-			break;
+			life--;
+			printf("당신은 죽었습니다.\n");
+			return life;
 		}
 	}
+	getchar();
+	return 0;
 }
 
-int upanddown()
+int upanddown(int life)
 {
 	int rand_num = 0; // 랜덤값저장
 	int input;
 	int chance = 10;
-
-	srand((unsigned int)time(NULL));
-	rand_num = rand() % 100 + 1; // 0~100
+	int result = 0;
 
 	while (1)
 	{
-		if (chance == 0)
-		{
-			printf("실패\n");
-			break;
-		}
-		printf("숫자를 입력하세요(0~100)\n남은 기회 %d회\n", chance);
-		scanf("%d", &input);
+		getchar();
+		printf("**************** UP&DOWN 게임 ****************\n\n");
+		printf("2자리의 숫자를 10번의 기회 안에 모두 맞추셔야합니다.\n\n");
+		printf("이걸 못하지는 않겠죠 ㅎㅎ?? \n");
+		printf("지금 바로 시작합니다! enter키를 눌러주세요~ \n");
+		getchar();
 
-		if (input < 0 || input > 100)
+		srand((unsigned int)time(NULL));
+		rand_num = rand() % 100 + 1; // 0~100
+
+		while (1)
 		{
-			printf("범위에 벗어난 숫자 입니다\n");
-			// continue;
+			if (chance == 0)
+			{
+				printf("실패\n");
+				printf("정답은 %d 입니다.\n", rand_num);
+				result = 0;
+				break;
+			}
+			printf("숫자를 입력하세요(0~100)\n남은 기회 %d회\n", chance);
+			scanf("%d", &input);
+
+			if (input < 0 || input > 100)
+			{
+				printf("범위에 벗어난 숫자 입니다\n");
+				// continue;
+			}
+			else if (input == rand_num)
+			{
+				printf("정답입니다.\n");
+				result = 1;
+				break;
+			}
+			else if (input > rand_num)
+			{
+				printf("DOWN\n");
+				chance--;
+			}
+			else if (input < rand_num && input > 0 && input < 100)
+			{
+				printf("UP\n");
+				chance--;
+			}
+			else
+			{
+				printf("숫자가 아닙니다");
+			}
 		}
-		else if (input == rand_num)
+		if (result == 1)
 		{
-			printf("정답입니다.\n");
-			break;
+			printf("\n게임하시느라 고생많았습니다. 다음 게임으로 넘어갑니다. \n");
+			return life;
 		}
-		else if (input > rand_num)
+		else if (result == 0 && life > 0)
 		{
-			printf("DOWN\n");
-			chance--;
+			printf("당신의 목숨이 1 감소하였습니다.\n");
+			printf("게임을 다시 시작하시려면 enter키를 눌러주세요. ㅋ\n\n");
+			chance = 10;
+			life--; // 목숨 -1하도록하기
 		}
-		else if (input < rand_num && input > 0 && input < 100)
+
+		else if (result == 0 && life <= 0)
 		{
-			printf("UP\n");
-			chance--;
-		}
-		else
-		{
-			printf("숫자가 아닙니다");
+			life--;
+			printf("당신은 죽었습니다.\n");
+			return life;
 		}
 	}
 }
@@ -596,40 +753,37 @@ int main()
 {
 	int life; // 라이프 생각하기 위해 추가
 	life = 1;
-	printf("게임을 시작합니다! \n게임의 순서는 \n");
-	printf("1 : 가위바위보 2: 객관식 문제 3: 구구단 4:숫자야구 5:단어맞추기 6:업앤다운 으로 진행합니다\n");
+	printf("게임을 시작합니다! \n게임의 순서는 아래와 같이 진행합니다. \n");
+	printf(" 1 : 가위바위보\n 2 : 5지선다 문제\n 3 : 구구단\n 4 : 숫자야구\n 5 : Hangman\n 6 : UP&DOWN\n\n");
 	printf("준비가 되었다면 enter키를 눌러주세요!\n\n");
 	getchar();
 
-	// life = RSP(life);
-
-	// printf("현재 당신의 목숨은 : %d입니다.\n", life);
-	// printf("준비가 되었다면 enter키를 눌러주세요!\n\n");
-	// getchar();
-
-	/*if (life >= 0)
-	{
-		printf("현재 당신의 목숨은 : %d입니다.\n", life);
-		printf("준비가 되었다면 enter키를 눌러주세요!\n\n");
-		getchar();
-		life = question(life);
-	}*/
-
-	/*if (life >= 0)
-	{
-		printf("현재 당신의 목숨은 : %d입니다.\n", life);
-		printf("준비가 되었다면 enter키를 눌러주세요!\n\n");
-		getchar();
-		life = Multiplication(life);
-	}*/
+	life = RSP(life);
+	getchar();
 
 	if (life >= 0)
 	{
 		printf("현재 당신의 목숨은 : %d입니다.\n", life);
 		printf("준비가 되었다면 enter키를 눌러주세요!\n\n");
 		getchar();
-		life = number_baseball(life);
+		life = question(life);
 	}
+
+	if (life >= 0)
+	{
+		printf("현재 당신의 목숨은 : %d입니다.\n", life);
+		printf("준비가 되었다면 enter키를 눌러주세요!\n\n");
+		getchar();
+		life = Multiplication(life);
+	}
+
+	/*if (life >= 0)
+	{
+		printf("현재 당신의 목숨은 : %d입니다.\n", life);
+		printf("준비가 되었다면 enter키를 눌러주세요!\n\n");
+		getchar();
+		life = number_baseball(life);
+	}*/
 
 	if (life >= 0)
 	{
@@ -649,6 +803,6 @@ int main()
 
 	if (life < 0)
 	{
-		printf("목숨이 없어서 게임이 끝났습니다...");
+		printf("목숨이 없어서 게임이 끝났습니다...\n");
 	}
 }
