@@ -3,7 +3,7 @@
 #include  <stdlib.h>// rand 함수 사용
 #include <time.h> // 시간을 통해 랜덤 사용
 
-int RSP(){
+int RSP(int life){
 
     int com; // 컴퓨터가 낸 값을 저장합니다. 
 
@@ -15,20 +15,25 @@ int RSP(){
     int cnt = 0; // 게임의 횟수를 저장합니다. 0으로 초기화합니다. 
 
     srand((unsigned)time(NULL)); // rand 함수의 결과가 매번 다르도록 시드값을 지정합니다. 
-
+printf("**************** 가위 바위 보 게임 ****************\n\n"); 
+printf("총 5판을 진행하고 승리가 더 많아야 다음게임으로 이동이 가능합니다 ㅎㅎㅎㅎ\n\n");
+printf("컴퓨터한테 지는 바보는 없겠죠 ㅎㅎ?? \n"); 
+printf("지금 바로 시작합니다! enter키를 눌러주세요~ \n"); 
+printf("%d",life);
+getchar();
 while(1) // 사용자가 종료할 때 까지 반복합니다. 
 
 { 
 
 com = rand()%3+1; // 1~3 값 중 하나를 저장합니다. 
 
-printf("**************** 가위 바위 보 게임 ****************\n"); 
 
-printf("(1. 가위 _ 2. 바위 _ 3. 보 _ 0. 종료)\n\n"); 
+printf("(1. 가위 _ 2. 바위 _ 3. 보 )\n\n"); 
 
 printf("입력해주세요 : "); 
 
 scanf("%d",&user); 
+
 
     if(user > 0 && user < 4) // 사용자가 1~3 값을 입력했을 경우입니다. 
 
@@ -70,7 +75,7 @@ scanf("%d",&user);
 
         { 
 
-            printf("ㅋㅋㅋ이겼습니다.\n\n"); 
+            printf(" 축하합니다! 이겼습니다.\n\n"); 
 
             result[0]++; // 승리 횟수를 증가시킵니다. 
 
@@ -85,23 +90,34 @@ scanf("%d",&user);
 
     { 
 
-        if(user == 0) // 사용자가 입력한 값이 0이면 종료합니다. 
-
-        { 
-
-        printf("게임을 종료합니다.\n");
-
-        break; // 종료
-
-        } // 그 외에는 예외처리 메세지 출력 
+        
 
     printf("숫자를 제대로 입력해주세요\n\n"); 
 
     } 
+    if (cnt==5 && result[0]>result[2]){
+        printf("총 5판을 진행했습니다.\n");
+        printf("%d전 %d승 %d무 %d패\n\n", cnt, result[0], result[1], result[2]); 
+        printf("\n게임하시느라 고생많았습니다. 다음게임으로 이동합니다 \n");
+        return life;
+        
+    }
+    else if (cnt==5 && result[0]<=result[2]&& life>0)
+    {
+        printf("총 5판을 진행했습니다.\n");
+        printf("컴퓨터한테 지셨네요 ㅋ\n");
+        cnt=0; life--;//목숨 -1하도록하기
+        result[0]=0;result[1]=0;result[2]=0;
+    }
 
-system("pause"); // 일시정지 아무키나 누르면 진행됩니다. 
+    else if (cnt==5 && result[0]<=result[2] && life<=0)
+    {
+        life--;
+        printf("총 5판을 진행했습니다.\n");
+        printf("목숨이 없네요... GG\n");
+        return life;
+    }
 
-system("cls"); // 화면 내용을 모두 지웁니다. 
 
 } 
 
@@ -236,7 +252,7 @@ int question(){
 }
 
  
-void Multiplication() //3번 문제
+int Multiplication() //3번 문제
 {
       int firstnum, secondnum, answer, result;
       int count = 0;
@@ -504,32 +520,61 @@ int upanddown() {
 }
 
 int main(){
-    int number;
-    printf("게임을 선택하세요! \n");
-    printf("1 : 가위바위보 2: 객관식 문제 3: 구구단 4:숫자야구 5:단어맞추기 6:업앤다운\n");
-    scanf("%d",&number);
-    if (number==1){
-    RSP();    
+    int life,a; // 라이프 생각하기 위해 추가
+    life =0;
+    printf("게임을 시작합니다! \n게임의 순서는 \n");
+    printf("1 : 가위바위보 2: 객관식 문제 3: 구구단 4:숫자야구 5:단어맞추기 6:업앤다운 으로 진행합니다\n");
+    printf("준비가 되었다면 enter키를 눌러주세요!\n\n");
+    getchar();
+
+    life=RSP(life);
+    
+    printf("남은 목숨은 : %d입니다.\n",life);
+    printf("준비가 되었다면 enter키를 눌러주세요!\n\n");
+    getchar();
+
+    if (life>=0){
+    printf("남은 목숨은 : %d입니다.\n",life);
+    printf("준비가 되었다면 enter키를 눌러주세요!\n\n");
+    getchar(); 
+    life=question(life);
     }
-    else if( number ==2)
-    {
-        question();
+
+
+    if(life>=0){
+    printf("남은 목숨은 : %d입니다.\n",life);
+    printf("준비가 되었다면 enter키를 눌러주세요!\n\n");
+    getchar();
+    life=Multiplication(life);
     }
-    else if (number ==3) 
-    {
-            Multiplication();
+
+
+    if(life>=0){
+    printf("남은 목숨은 : %d입니다.\n",life);
+    printf("준비가 되었다면 enter키를 눌러주세요!\n\n");
+    getchar();
+    life=number_baseball(life);
     }
-    else if (number ==4) 
-    {
-            number_baseball();
+
+
+    if(life>=0){
+    printf("남은 목숨은 : %d입니다.\n",life);
+    printf("준비가 되었다면 enter키를 눌러주세요!\n\n");
+    getchar();
+    life =hangman(life);
     }
-    else if (number ==5) 
-    {
-            hangman();
+
+
+    if(life>=0){
+    printf("남은 목숨은 : %d입니다.\n",life);
+    printf("준비가 되었다면 enter키를 눌러주세요!\n\n");
+    getchar();
+    life= upanddown(life);
     }
-    else if (number ==6) 
-    {
-            upanddown();
+
+
+    if(life<0){
+    printf("목숨이 없어서 게임이 끝났습니다...");
     }
 }
 
