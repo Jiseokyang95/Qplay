@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <time.h>
+
+void hangmanpicture(int a){
+    if(a == 6){printf("┌────┐\n");printf("│    │\n");printf("│     \n");printf("│     \n");printf("│     \n");printf("┴     \n");}
+    else if(a ==5){ printf("┌────┐\n");printf("│    │\n");printf("│    o\n");printf("│     \n");printf("│     \n");printf("┴     \n");}
+    else if(a ==4){ printf("┌────┐\n");printf("│    │\n");printf("│    o\n");printf("│    ┼\n");printf("│     \n");printf("┴     \n");}
+    else if(a ==3){ printf("┌────┐\n");printf("│    │\n");printf("│    o\n");printf("│    ┼-\n");printf("│     \n");printf("┴     \n");}
+    else if(a ==2){ printf("┌────┐\n");printf("│    │\n");printf("│    o\n");printf("│   -┼-\n");printf("│     \n");printf("┴     \n");}
+    else if(a ==1){ printf("┌────┐\n");printf("│    │ ┌────────────┐\n");printf("│    o<   HELP!!!!! │\n");printf("│   -┼-└────────────┘\n");printf("│   ┘ \n");printf("┴     \n");}
+    else if(a ==0){ printf("┌────┐\n");printf("│    │\n");printf("│    o\n");printf("│   -┼-\n");printf("│   ┘ └\n");printf("┴     \n");}
+}
+void main() {
+
+
+    srand(time(NULL));
+ 
+    char word[5][7]= { "grapes", "citron", "cherry", "orange", "banana" };
+    
+    char* answer = word[rand() % 5];
+    char blind[]= "______";
+    char input;
+    int try; //횟수
+    int key;
+
+    int j; // j==글자수
+    int chance=6;
+ 
+
+    while (1) {
+        try = 0;
+        key = 0;
+ 
+        printf("%s : ", blind);
+        printf("Hint : 과일");
+        scanf(" %c", &input);
+ 
+        // 입력 단어가 정답 문장에 있는지 확인
+        for (int i = 0; i < 6; i++) {
+            if (input == blind[i]) {
+                key = 1;
+                printf("이미 등록한 문자입니다!! 재입력하세요!! \n");
+                hangmanpicture(chance);
+                break;
+            }
+            else if (input == answer[i]) {
+                blind[i] = input;
+                try++;
+            }
+        }
+ 
+        // 이미 등록한 문자라면 재입력 받아주기
+        if (key == 1) {
+            continue;
+        }
+ 
+        
+        if (try == 0) {
+            chance--;
+            printf("기회가 %d번 남았습니다\n",chance);
+            hangmanpicture(chance);
+            if (chance == 0) {
+                printf("실패\n");
+                break;
+            }
+        }
+ 
+        // 모든 단어를 다 맞췄다면 정답을 출력하고 종료
+        if (strcmp(blind, answer) == 0) {
+            printf("%s\n", blind);
+            printf("정답");
+            break;
+        }
+    }
+
+}
