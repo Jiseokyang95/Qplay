@@ -17,7 +17,7 @@ int gold1(int gold, int life, int sub_life)
 		printf("당신은 %d개의 황금을 얻었다.\n", random);
 		return gold;
 	}
-	else if (sub_life == life - 1)
+	else if (sub_life == life - 1 || sub_life == life - 2 )
 	{
 		random = rand() % 6 + 1;
 		gold = gold + random;
@@ -44,11 +44,18 @@ int RSP(int life)
 	int cnt = 0; // 게임의 횟수를 저장합니다. 0으로 초기화합니다.
 
 	srand((unsigned)time(NULL)); // rand 함수의 결과가 매번 다르도록 시드값을 지정합니다.
-	printf("**************** 가위 바위 보 게임 ****************\n\n");
-	printf("총 5판을 진행하고 승리가 더 많아야 다음게임으로 이동이 가능합니다 ㅎㅎㅎㅎ\n\n");
-	printf("컴퓨터한테 지는 바보는 없겠죠 ㅎㅎ?? \n");
+	//printf("**************** 가위 바위 보 게임 ****************\n\n");
+	//printf("총 5판을 진행하고 승리가 더 많아야 다음게임으로 이동이 가능합니다 ㅎㅎㅎㅎ\n\n");
+	//printf("컴퓨터한테 지는 바보는 없겠죠 ㅎㅎ?? \n");
+	//printf("지금 바로 시작합니다! enter키를 눌러주세요~ \n");
+	//getchar();
+	printf("**************** 동굴인의 가위바위보 ****************\n\n");
+	printf("동굴에 들어온 당신은 동굴인의 영역을 침범 했습니다.\n");
+	printf("하지만 가위바위보를 무척 좋아하는 동굴인은 자신에게 가위바위보를 이긴다면 무사히 보내준다 합니다.\n");
+	printf("가위바위보는 5판 진행 합니다.\n");
 	printf("지금 바로 시작합니다! enter키를 눌러주세요~ \n");
 	getchar();
+	
 	while (1) // 사용자가 종료할 때 까지 반복합니다.
 
 	{
@@ -69,7 +76,7 @@ int RSP(int life)
 
 			// 컴퓨터, 사용자가 낸 값에 따라 가위, 바위, 보 중 출력할 값을 선택합니다.
 
-			printf("\n컴퓨터 : %s\n", (com == 1 ? "가위" : com == 2 ? "바위"
+			printf("\n동굴인 : %s\n", (com == 1 ? "가위" : com == 2 ? "바위"
 																	: "보"));
 
 			printf("사용자 : %s\n\n", (user == 1 ? "가위" : user == 2 ? "바위"
@@ -120,14 +127,16 @@ int RSP(int life)
 		{
 			printf("총 5판을 진행했습니다.\n");
 			printf("%d전 %d승 %d무 %d패\n\n", cnt, result[0], result[1], result[2]);
-			printf("오! 컴퓨터를 이기셨군요!\n");
-			printf("\n게임하시느라 고생많았습니다. 다음게임으로 이동합니다 \n");
+			//printf("오! 컴퓨터를 이기셨군요!\n");
+			printf("오! 동굴인을 이기셨군요!\n");
+			//printf("\n게임하시느라 고생많았습니다. 다음게임으로 이동합니다 \n");
+			printf("\n위기를 넘기고 동굴 깊숙히 이동합니다 \n");
 			return life;
 		}
 		else if (cnt == 5 && result[0] <= result[2] && life > 0)
 		{
 			printf("총 5판을 진행했습니다.\n");
-			printf("컴퓨터한테 지셨네요 ㅋ\n");
+			printf("동굴인 한테 지셨네요 ㅋ\n");
 			cnt = 0;
 			life--; // 목숨 -1하도록하기
 			printf("현재 당신의 목숨은 %d 입니다.\n", life);
@@ -154,10 +163,15 @@ int question(int life)
 	correct = 0;
 	fail = 0;
 
-	printf("**************** 5지선다 Quiz ****************\n\n");
-	printf("총 5판을 진행하고 맞춘 문제가 더 많아야 다음게임으로 이동이 가능합니다 ㅎㅎㅎㅎ\n\n");
-	printf("이걸 틀리는 바보는 없겠죠 ㅎㅎ?? \n");
-	printf("지금 바로 시작합니다! enter키를 눌러주세요~ \n");
+	//printf("**************** 5지선다 Quiz ****************\n\n");
+	//printf("총 5판을 진행하고 맞춘 문제가 더 많아야 다음게임으로 이동이 가능합니다 ㅎㅎㅎㅎ\n\n");
+	//printf("이걸 틀리는 바보는 없겠죠 ㅎㅎ?? \n");
+	//printf("지금 바로 시작합니다! enter키를 눌러주세요~ \n");
+	//getchar();
+	printf("**************** 동굴의 수수께끼 ****************\n\n");
+	printf("동굴을 계속 걷던 당신은 어디선가 들려오는 소리에 집중 합니다.\n");
+	printf("\"동굴을 계속 나아가기 위해선 내 문제를 맞춰라\".\n");
+	printf("당신은 5문제를 과반수 이상 맞춰야 합니다. 지금 바로 시작합니다! enter키를 눌러주세요~ \n");
 	getchar();
 	while (1)
 	{
@@ -285,14 +299,15 @@ int question(int life)
 		{
 			printf("총 5판을 진행했습니다.\n");
 			printf("%d문제의 정답을 맞추셨습니다.\n", correct);
-			printf("\n게임하시느라 고생많았습니다. 다음게임으로 이동합니다 \n");
+			//printf("\n게임하시느라 고생많았습니다. 다음게임으로 이동합니다 \n");
+			printf("동굴을 계속 나아갑니다\n\n");
 			getchar();
 			return life;
 		}
 		else if (correct < fail && life > 0)
 		{
 			printf("총 5판을 진행했습니다.\n");
-			printf("당신은 과락입니다. ㅋ\n");
+			printf("당신은 과락입니다. 목숨을 잃습니다.\n\n");
 			life--; // 목숨 -1하도록하기
 			correct = 0;
 			fail = 0;
@@ -302,7 +317,7 @@ int question(int life)
 		{
 			life--;
 			printf("총 5판을 진행했습니다.\n");
-			printf("당신은 과락입니다. ㅋ\n");
+			printf("당신은 과락입니다.\n");
 			return life;
 		}
 	}
@@ -315,13 +330,19 @@ int Multiplication(int life) // 3번 문제
 	int correct = 0;
 	int fail = 0;
 
-	while (1)
-	{
-		printf("**************** 구구단 게임 ****************\n\n");
-		printf("총 5판을 진행하고 맞춘 문제가 더 많아야 다음게임으로 이동이 가능합니다 ㅎㅎㅎㅎ\n\n");
-		printf("이걸 틀리는 바보는 없겠죠 ㅎㅎ?? \n");
+		printf("**************** 똑똑한 고블린의 구구단****************\n\n");
+		printf("갑자기 나타난 고블린이 당신의 목숨을 위협합니다.\n");
+		printf("고블린\"나와의 구구단 승부에서 이긴다면 목숨만은 살려주지.\"\n");
 		printf("지금 바로 시작합니다! enter키를 눌러주세요~ \n");
 		getchar();
+
+	while (1)
+	{
+		//printf("**************** 구구단 게임 ****************\n\n");
+		//printf("총 5판을 진행하고 맞춘 문제가 더 많아야 다음게임으로 이동이 가능합니다 ㅎㅎㅎㅎ\n\n");
+		//printf("이걸 틀리는 바보는 없겠죠 ㅎㅎ?? \n");
+		//printf("지금 바로 시작합니다! enter키를 눌러주세요~ \n");
+		//getchar();
 
 		while (1)
 		{
@@ -355,13 +376,15 @@ int Multiplication(int life) // 3번 문제
 		{
 			printf("총 5판을 진행했습니다.\n");
 			printf("%d문제의 정답을 맞추셨습니다.\n", correct);
-			printf("\n게임하시느라 고생많았습니다. 다음게임으로 이동합니다 \n");
+			//printf("\n게임하시느라 고생많았습니다. 다음게임으로 이동합니다 \n");
+			printf("\n굶주린 똑똑한 고블린을 뒤로한 체 당신은 나아갑니다. \n\n");
 			return life;
 		}
 		else if (count == 5 && correct < fail && life > 0)
 		{
 			printf("총 5판을 진행했습니다.\n");
-			printf("당신은 과락입니다. ㅋ\n\n");
+			//printf("당신은 과락입니다. ㅋ\n\n");
+			printf("오늘은 고블린이 배가 부르겠군요. 목숨을 잃었습니다.\n다시 한번 해봅시다.\n\n");
 			life--; // 목숨 -1하도록하기
 			correct = 0;
 			count = 0;
@@ -417,11 +440,19 @@ quest:
 				i--; // i의 값을 줄여 다시 이전으로 돌아가도록
 	}
 	getchar();
-	printf("**************** 숫자야구 게임 ****************\n\n");
-	printf("3자리의 숫자를 9회 안에 모두 맞추셔야합니다.\n\n");
-	printf("이걸 못하지는 않겠죠 ㅎㅎ?? \n");
+	//printf("**************** 숫자야구 게임 ****************\n\n");
+	//printf("3자리의 숫자를 9회 안에 모두 맞추셔야합니다.\n\n");
+	//printf("이걸 못하지는 않겠죠 ㅎㅎ?? \n");
+	//printf("지금 바로 시작합니다! enter키를 눌러주세요~ \n");
+	//getchar();
+	printf("**************** 피라냐 수족관 탈출 게임 ****************\n\n");
+	printf("당신이 방에 들어서자 방안에 물이 차오르기 시작합니다.\n");
+	printf("문의 암호를 맞춰 탈출 하세요.\n");
+	printf("놀랍게도 암호문은 숫자 야구 게임으로 이루어져 있습니다!!!\n");
 	printf("지금 바로 시작합니다! enter키를 눌러주세요~ \n");
 	getchar();
+
+
 
 	while (1) // 숫자야구 게임 시작
 
@@ -484,8 +515,8 @@ quest:
 
 		{
 
-			printf("***** 승리했습니다. *****\n\n");
-
+			//printf("***** 승리했습니다. *****\n\n");
+			printf("문을 열었습니다!!\n\n");
 			return life;
 		}
 
@@ -493,8 +524,9 @@ quest:
 
 		{
 
-			printf("***** 패배했습니다.. 정답 : %d %d %d *****\n\n", computerBall[0], computerBall[1], computerBall[2]);
+			printf("***** 실패했습니다.. 정답 : %d %d %d *****\n\n", computerBall[0], computerBall[1], computerBall[2]);
 			life--;
+                  
 			if (life >= 0)
 			{
 				goto quest;
@@ -581,6 +613,21 @@ void hangmanpicture(int a)
 int hangman(int life)
 {
 
+
+	while (1)
+	{
+		getchar();
+		//printf("**************** Hangman 게임 ****************\n\n");
+		//printf("단어를 맞춰주세요!\n\n");
+		//printf("이걸 못하지는 않겠죠 ㅎㅎ?? \n");
+		//printf("지금 바로 시작합니다! enter키를 눌러주세요~ \n");
+		//getchar();
+		printf("**************** 식인종의 Hangman ****************\n\n");
+		printf("식인종-\"내가 생각하는 과일을 맞춘다면 인질을 풀어줄 것이고 실패한다면 넌 죽을 것 이다.\"\n");
+		printf("단어를 맞춰 인질을 구출하세요.\n");
+		printf("지금 바로 시작합니다! enter키를 눌러주세요~ \n");
+		getchar();
+		
 	char blind[] = "______";
 	char input;
 	int try; // 횟수
@@ -588,15 +635,6 @@ int hangman(int life)
 	int j; // j==글자수
 	int chance = 6;
 	int result = 0;
-
-	while (1)
-	{
-		getchar();
-		printf("**************** Hangman 게임 ****************\n\n");
-		printf("단어를 맞춰주세요!\n\n");
-		printf("이걸 못하지는 않겠죠 ㅎㅎ?? \n");
-		printf("지금 바로 시작합니다! enter키를 눌러주세요~ \n");
-		getchar();
 
 		srand(time(NULL));
 
@@ -610,7 +648,7 @@ int hangman(int life)
 			key = 0;
 
 			printf("%s : \n", blind);
-			printf("알파벳을 한글자씩 입력해주세요.           Hint : 과일\n");
+			printf("알파벳을 한글자씩 입력해주세요.\n");
 			scanf(" %c", &input);
 
 			// 입력 단어가 정답 문장에 있는지 확인
@@ -660,12 +698,13 @@ int hangman(int life)
 		}
 		if (result == 1)
 		{
-			printf("\n게임하시느라 고생많았습니다. enter키를 눌러주세요. \n");
+			//printf("\n게임하시느라 고생많았습니다. enter키를 눌러주세요. \n");
+			printf("인질을 무사히 구해내셨군요.\nenter키를 눌러주세요.\n\n");
 			return life;
 		}
 		else if (result == 0 && life > 0)
 		{
-			printf("당신의 목숨이 1 감소하였습니다.\n");
+			printf("당신의 죽음을 인질또한 함께 할 것 입니다.\n");
 			printf("게임을 다시 시작합니다. ㅋ\n\n");
 			getchar();
 			chance = 6;
@@ -680,7 +719,6 @@ int hangman(int life)
 		}
 	}
 	getchar();
-	return 0;
 }
 
 int upanddown(int life)
@@ -692,10 +730,15 @@ int upanddown(int life)
 
 	while (1)
 	{
-		getchar();
-		printf("**************** UP&DOWN 게임 ****************\n\n");
-		printf("2자리의 숫자를 10번의 기회 안에 모두 맞추셔야합니다.\n\n");
-		printf("이걸 못하지는 않겠죠 ㅎㅎ?? \n");
+		//getchar();
+		//printf("**************** UP&DOWN 게임 ****************\n\n");
+		//printf("2자리의 숫자를 10번의 기회 안에 모두 맞추셔야합니다.\n\n");
+		//printf("이걸 못하지는 않겠죠 ㅎㅎ?? \n");
+		//printf("지금 바로 시작합니다! enter키를 눌러주세요~ \n");
+		//getchar();
+		printf("**************** 100개의 출구 UP&DOWN ****************\n\n");
+		printf("동굴을 걷던 당신에게 100개의 출구가 나타났습니다.\n");
+		printf("10번의 기회를 가지고 알맞은 출구로 탈출 해야합니다.\n");
 		printf("지금 바로 시작합니다! enter키를 눌러주세요~ \n");
 		getchar();
 
@@ -727,12 +770,12 @@ int upanddown(int life)
 			}
 			else if (input > rand_num)
 			{
-				printf("DOWN\n");
+				printf("\nDOWN 남은 기회 %d번 \n",chance);
 				chance--;
 			}
 			else if (input < rand_num && input > 0 && input < 100)
 			{
-				printf("UP\n");
+				printf("\nUP 남은 기회 %d번 \n",chance);
 				chance--;
 			}
 			else
@@ -742,12 +785,13 @@ int upanddown(int life)
 		}
 		if (result == 1)
 		{
-			printf("\n게임하시느라 고생많았습니다. 다음 게임으로 넘어갑니다. \n");
+			//printf("\n게임하시느라 고생많았습니다. 다음 게임으로 넘어갑니다. \n");
+			printf("당신은 %d 번째 통로로 유유히 빠져나갑니다.\n",rand_num);
 			return life;
 		}
 		else if (result == 0 && life > 0)
 		{
-			printf("당신의 목숨이 1 감소하였습니다.\n");
+			printf("출구를 찾지 못해 당신의 목숨이 1 감소하였습니다.\n");
 			printf("게임을 다시 시작하시려면 enter키를 눌러주세요. ㅋ\n\n");
 			chance = 10;
 			life--; // 목숨 -1하도록하기
@@ -759,7 +803,7 @@ int upanddown(int life)
 			printf("당신은 죽었습니다.\n");
 			return life;
 		}
-	}
+	}getchar();
 }
 
 int Timer(int life)
@@ -771,27 +815,29 @@ int Timer(int life)
 
 	while (1)
 	{
+		getchar();
 		printf("동굴 저 멀리 출구가 보입니다\n");
 		// printf("**************** Timer 게임 ****************\n\n");
 		// printf("알람이 표시된 후 0.7초 내 반응하세요.\n\n");
-		printf("그 순간 발 밑의 딸깍거리는 소리와 함께 당신은 함정을 밟았다는걸 직감 합니다.");
+		printf("그 순간 발 밑의 딸깍거리는 소리와 함께 당신은 함정을 밟았다는걸 직감 합니다.\n");
 		// printf("이걸 못하지는 않겠죠 ㅎㅎ?? \n");
 		// printf("지금 바로 시작합니다! enter키를 눌러주세요~ \n");
 		printf("알람이 표시된 후 0.7초 내 반응하세요.\n\n");
+		printf("지금 바로 시작합니다! enter키를 눌러주세요~ \n");
+		getchar();
 		// getchar();
-
 		srand(time(NULL));
 
 		// printf("순발력 게임을 시작합니다. 알림이 보이시면 엔터 키를 눌러주세요.\n");
 
 		// 랜덤한 딜레이 시간 설정 (1~3초)
-		int delay = rand() % 5 + 1;
+		int delay = rand() % 3 + 1;
 
 		sleep(delay);
 
 		clock_gettime(CLOCK_MONOTONIC, &begin);
 
-		printf("지금 바로 엔터 키를 누르세요!\n");
+		printf("지금 바로 엔터 키를 누르세요! 화살이 날라옵니다.\n");
 		// 엔터 키 입력 대기
 		getchar();
 
@@ -803,9 +849,8 @@ int Timer(int life)
 		if (time > 0.7 && life > 0)
 		{
 			printf("시간 초과! 반응 속도: %lf초\n", (double)time);
-			printf("당신의 목숨이 1 감소하였습니다.\n");
+			printf("\"윽\" 화살에 맞았습니다. 당신의 목숨이 1 감소하였습니다.\n");
 			printf("게임을 다시 시작하시려면 enter키를 눌러주세요. ㅋ\n\n");
-			getchar();
 			life--; // 목숨 -1하도록하기
 		}
 		else if (time <= 0.7)

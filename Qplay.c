@@ -17,10 +17,12 @@ int main()
 	int life = 10;
 	int sub_life = life;
 	int gold = 0;
+	srand((unsigned)time(NULL));
+	int givegold=0;
 	system("clear");
 	printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n");
 	printf("■                                        ■\n");
-	printf("■           수수께끼의 황금동굴           ■\n");
+	printf("■           수수께끼의 황금동굴          ■\n");
 	printf("■                                        ■\n");
 	printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n\n");
 	sleep(3);
@@ -78,7 +80,11 @@ int main()
 		getchar();
 
 		life = hangman(life);
+			getchar();
 		gold = gold1(gold, life, sub_life);
+		givegold= rand()%10+1;
+		gold = gold +givegold;
+		printf("인질이 당신에게 고마움의 표시로 황금을 %d 개 주었습니다.\n", givegold);
 		sub_life = life;
 	}
 
@@ -90,6 +96,7 @@ int main()
 		getchar();
 
 		life = upanddown(life);
+		getchar();
 		gold = gold1(gold, life, sub_life);
 		sub_life = life;
 	}
@@ -99,11 +106,16 @@ int main()
 		printf("현재 당신의 목숨은 : %d입니다.\n", life);
 		printf("현재 당신의 황금은 : %d입니다.\n", gold);
 		printf("준비가 되었다면 enter키를 눌러주세요!\n\n");
-		getchar();
 
 		life = Timer(life);
 		gold = gold1(gold, life, sub_life);
 		sub_life = life;
+
+
+		printf("현재 당신의 목숨은 : %d입니다.\n", life);
+		printf("현재 당신의 황금은 : %d입니다.\n", gold);
+		printf("환한 빛이 당신에게 쏫아지는걸 느끼며 동굴의 출구가 보입니다 엔터를 눌러 동굴을 나가세요!\n\n");
+		getchar();
 	}
 
 	system("clear");
@@ -126,14 +138,14 @@ int main()
 	case 10:
 	case 9:
 	case 8:
-		printf("몸까지 멀쩡하다 팔에 긁힌 자국이 남아 있지만 이 정도는 신경 쓸 필요도 없다.");
+		printf("몸까지 멀쩡합니다. 팔에 긁힌 자국이 남아 있지만 이 정도는 신경 쓸 필요도 없습니다. 당신은 건강하니까요.");
 		break;
 
 	case 7:
 	case 6:
 	case 5:
 	case 4:
-		printf("온갖 고통도 함께 얻었다. 셔츠는 피로 낭자하며 비가 오는 날엔 무릎이 시릴 것이다");
+		printf("온갖 고통도 함께 얻었다. 셔츠는 피로 낭자하며 비가 오는 날엔 무릎이 시릴 것 입니다.");
 		break;
 
 	case 3:
@@ -157,7 +169,7 @@ int main()
 		break;
 	}
 
-	printf("\n\n\n게임 종료\n저희 게임을 플레이 해주셔서 감사합니다.");
+	printf("\n\n\n게임 종료\n저희 게임을 플레이 해주셔서 감사합니다.\n최종일 , 양지석 ,박민혁 2023kosta프로젝트 완성본");
 
 	if (life < 0)
 	{
