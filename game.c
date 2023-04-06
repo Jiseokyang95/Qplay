@@ -19,7 +19,7 @@
 #include <time.h> // 시간을 통해 랜덤 사용
 #include <unistd.h>
 
-int gold1(int gold, int life, int sub_life)
+int getgold(int gold, int life, int sub_life)
 {
 	int random;
 	srand((unsigned)time(NULL));
