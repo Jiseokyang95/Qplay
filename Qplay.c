@@ -14,7 +14,6 @@ Git hub : gh repo clone Jiseokyang95/Qplay
 3. 제한 Life 생성
 4. 게임 순서 구현
 */
-
 #define _CRT_SECURE_NO_WARNINGS
 #include "game.h"
 #include "rank.h"

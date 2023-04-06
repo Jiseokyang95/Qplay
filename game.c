@@ -18,7 +18,8 @@
 #include <string.h>
 #include <time.h> // 시간을 통해 랜덤 사용
 #include <unistd.h>
-
+#include <sys/time.h>
+#include <sys/sysinfo.h>
 
 /*
 - gold1 함수 : 황금을 얻고 출력하는 함수
@@ -133,13 +134,13 @@ int RSP(int life)
 
 			printf("%d전 %d승 %d무 %d패\n\n", cnt, result[0], result[1], result[2]);
 		}
-
+		
 		else // 사용자가 입력한 값이 1, 2, 3이 아닌 경우
 
 		{
-
 			printf("숫자를 제대로 입력해주세요\n\n");
 		}
+
 		if (cnt == 5 && result[0] > result[2])
 		{
 			printf("총 5판을 진행했습니다.\n");
@@ -411,7 +412,7 @@ int Multiplication(int life) // 3번 문제
 }
 /*
 - 숫자야구 게임
-- 9회안에 주어진 숫자를 맞추면 다음 게임으로 
+- 9회안에 주어진 숫자를 맞추면 다음 게임으로
 */
 int number_baseball(int life)
 
@@ -622,7 +623,6 @@ void hangmanpicture(int a)
 - 6번의 기회안에 주어진 단어를 맞추면 다음단계로 이동
 */
 
-
 int hangman(int life)
 {
 
@@ -831,13 +831,13 @@ int Timer(int life)
 
 		sleep(delay);
 
-		clock_gettime(CLOCK_MONOTONIC, &begin);
+		clock_gettime(1, &begin);
 
 		printf("지금 바로 엔터 키를 누르세요! 화살이 날라옵니다.\n");
 		// 엔터 키 입력 대기
 		getchar();
 
-		clock_gettime(CLOCK_MONOTONIC, &end);
+		clock_gettime(1, &end);
 
 		// 반응 속도 계산 (초 단위)
 		float time = (end.tv_sec - begin.tv_sec) + (end.tv_nsec - begin.tv_nsec) / 1000000000.0;
