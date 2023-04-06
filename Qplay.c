@@ -107,12 +107,7 @@ void print_leaderboard(Leaderboard leaderboard)
 
 int main()
 {
-	/*int life; // 라이프 생각하기 위해 추가
-	life = 1;
-	printf("게임을 시작합니다! \n게임의 순서는 아래와 같이 진행합니다. \n");
-	printf(" 1 : 가위바위보\n 2 : 5지선다 문제\n 3 : 구구단\n 4 : 숫자야구\n 5 : Hangman\n 6 : UP&DOWN\n\n");
-	printf("준비가 되었다면 enter키를 눌러주세요!\n\n");
-	getchar();*/
+	
 	int life = 10;
 	int sub_life = life;
 	int gold = 0;
