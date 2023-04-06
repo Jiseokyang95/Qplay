@@ -1,113 +1,31 @@
+/*
+게임 이름 : Qplay
+제작 기간 : 2023.03.30 ~ 2023.04.07
+게임 목적 : 여러가지 종합게임을 구현하고, 이를 Stage별 Clear하면서 Player의 순위를 기록, 비교하는 게임
+개발 환경 : C언어, Ubuntu
+Git hub : gh repo clone Jiseokyang95/Qplay
+작 성 자 : 최종일, 박민혁, 양지석
+*/
+
+/*
+<Qplay.c - Main.c>
+1. 게임 Background 설정
+2. Player data 기록
+3. 제한 Life 생성
+4. 게임 순서 구현
+*/
+
 #define _CRT_SECURE_NO_WARNINGS
 #include "game.h"
+#include "rank.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
 
-#define MAX_PLAYERS 10	   // 최대 플레이어 수
-#define MAX_NAME_LENGTH 20 // 플레이어 이름 최대 길이
-
-// 플레이어 정보 구조체
-typedef struct
-{
-	char name[MAX_NAME_LENGTH];
-	int score;
-} Player;
-
-// 순위 정보 구조체
-typedef struct
-{
-	Player players[MAX_PLAYERS];
-	int num_players;
-} Leaderboard;
-
-typedef struct
-{
-	char ntmp_name[MAX_NAME_LENGTH];
-	int nTmp;
-} ntmp_Player;
-
-// 순위 정보 구조체
-typedef struct
-{
-	Player ntmp_players[MAX_PLAYERS];
-	int ntmp_num_players;
-} ntmp;
-
-// 순위 파일에서 정보를 읽어와 순위 구조체에 저장하는 함수
-void load_leaderboard(Leaderboard *leaderboard)
-{
-	FILE *fp;
-	fp = fopen("leaderboard.txt", "r");
-
-	if (fp == NULL)
-	{
-		printf("순위 파일을 열 수 없습니다.\n");
-		return;
-	}
-
-	fscanf(fp, "%d", &leaderboard->num_players);
-
-	for (int i = 0; i < leaderboard->num_players; i++)
-	{
-		fscanf(fp, "%s %d", leaderboard->players[i].name, &leaderboard->players[i].score);
-	}
-
-	fclose(fp);
-}
-
-// 순위 구조체의 정보를 파일에 저장하는 함수
-void save_leaderboard(Leaderboard leaderboard)
-{
-	FILE *fp;
-	fp = fopen("leaderboard.txt", "w");
-
-	if (fp == NULL)
-	{
-		printf("순위 파일을 열 수 없습니다.\n");
-		return;
-	}
-
-	fprintf(fp, "%d\n", leaderboard.num_players);
-
-	for (int i = 0; i < leaderboard.num_players; i++)
-	{
-		fprintf(fp, "%s %d\n", leaderboard.players[i].name, leaderboard.players[i].score);
-	}
-
-	fclose(fp);
-}
-
-// 새로운 플레이어를 순위 구조체에 추가하는 함수
-void add_player(Leaderboard *leaderboard, char *name, int score)
-{
-	if (leaderboard->num_players >= MAX_PLAYERS)
-	{
-		printf("더 이상 플레이어를 추가할 수 없습니다.\n");
-		return;
-	}
-
-	strcpy(leaderboard->players[leaderboard->num_players].name, name);
-	leaderboard->players[leaderboard->num_players].score = score;
-	leaderboard->num_players++;
-}
-
-// 순위 구조체를 출력하는 함수
-void print_leaderboard(Leaderboard leaderboard)
-{
-    printf("순위\t이름\t점수\n");
-
-    for (int i = 0; i < leaderboard.num_players; i++)
-    {
-        printf("%d\t%s\t%d\n", i + 1, leaderboard.players[i].name, leaderboard.players[i].score);
-    }
-}
-
 int main()
 {
-	
 	int life = 10;
 	int sub_life = life;
 	int gold = 0;
