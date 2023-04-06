@@ -19,6 +19,10 @@
 #include <time.h> // 시간을 통해 랜덤 사용
 #include <unistd.h>
 
+
+/*
+- gold1 함수 : 황금을 얻고 출력하는 함수
+*/
 int getgold(int gold, int life, int sub_life)
 {
 	int random;
@@ -45,6 +49,10 @@ int getgold(int gold, int life, int sub_life)
 		return gold;
 	}
 }
+/*
+- 가위바위보 게임
+- 5판 게임 진행하여 이기면 황금을 얻고 다음게임으로 실행
+*/
 int RSP(int life)
 {
 
@@ -69,7 +77,7 @@ int RSP(int life)
 
 	{
 
-		com = 3; // rand() % 3 + 1; // 1~3 값 중 하나를 저장합니다.
+		com = rand() % 3 + 1; // 1~3 값 중 하나를 저장합니다.
 
 		printf("(1. 가위 _ 2. 바위 _ 3. 보 )\n\n");
 
@@ -136,9 +144,7 @@ int RSP(int life)
 		{
 			printf("총 5판을 진행했습니다.\n");
 			printf("%d전 %d승 %d무 %d패\n\n", cnt, result[0], result[1], result[2]);
-			// printf("오! 컴퓨터를 이기셨군요!\n");
 			printf("오! 동굴인을 이기셨군요!\n");
-			// printf("\n게임하시느라 고생많았습니다. 다음게임으로 이동합니다 \n");
 			printf("\n위기를 넘기고 동굴 깊숙히 이동합니다 \n");
 			return life;
 		}
@@ -164,7 +170,10 @@ int RSP(int life)
 	}
 	return 0;
 }
-
+/*
+- 퀴즈 게임
+- 5판 게임 진행하여 맞춘 문제가 틀린문제보다 많으면 다음게임을 실행
+*/
 int question(int life)
 {
 	int correct, fail; // 맞은 수,틀린수 출력
@@ -325,7 +334,10 @@ int question(int life)
 		}
 	}
 }
-
+/*
+- 구구단 게임
+- 5판 게임 진행하여 맞춘 문제가 틀린문제보다 많으면 다음게임을 실행
+*/
 int Multiplication(int life) // 3번 문제
 {
 	int firstnum, secondnum, answer, result;
@@ -397,7 +409,10 @@ int Multiplication(int life) // 3번 문제
 	getchar();
 	return 0;
 }
-
+/*
+- 숫자야구 게임
+- 9회안에 주어진 숫자를 맞추면 다음 게임으로 
+*/
 int number_baseball(int life)
 
 {
@@ -531,6 +546,10 @@ quest:
 	getchar();
 }
 
+/*
+- 행맨 게임에서 그림 출력을 위해 사용
+*/
+
 void hangmanpicture(int a)
 {
 	if (a == 6)
@@ -597,6 +616,12 @@ void hangmanpicture(int a)
 		printf("┴     \n");
 	}
 }
+
+/*
+- 행맨 게임
+- 6번의 기회안에 주어진 단어를 맞추면 다음단계로 이동
+*/
+
 
 int hangman(int life)
 {
@@ -701,7 +726,10 @@ int hangman(int life)
 	}
 	getchar();
 }
-
+/*
+- 업앤다운 게임
+- 10번의 기회안에 주어진 숫자를 맞추면 승리하는 게임
+*/
 int upanddown(int life)
 {
 	int rand_num = 0; // 랜덤값저장
