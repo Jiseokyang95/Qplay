@@ -57,7 +57,7 @@ int main()
 
 	life = RSP(life);
 	getchar();
-	gold = gold1(gold, life, sub_life);
+	gold = getgold(gold, life, sub_life);
 	sub_life = life;
 	system("clear");
 
@@ -70,7 +70,7 @@ int main()
 		system("clear");
 
 		life = question(life);
-		gold = gold1(gold, life, sub_life);
+		gold = getgold(gold, life, sub_life);
 		sub_life = life;
 	}
 
@@ -83,7 +83,7 @@ int main()
 		system("clear");
 
 		life = Multiplication(life);
-		gold = gold1(gold, life, sub_life);
+		gold = getgold(gold, life, sub_life);
 		sub_life = life;
 	}
 
@@ -96,7 +96,7 @@ int main()
 		system("clear");
 
 		life = number_baseball(life);
-		gold = gold1(gold, life, sub_life);
+		gold = getgold(gold, life, sub_life);
 		sub_life = life;
 	}
 
@@ -110,7 +110,7 @@ int main()
 
 		life = hangman(life);
 		getchar();
-		gold = gold1(gold, life, sub_life);
+		gold = getgold(gold, life, sub_life);
 		givegold = rand() % 10 + 1;
 		gold = gold + givegold;
 		printf("인질이 당신에게 고마움의 표시로 황금을 %d 개 주었습니다.\n", givegold);
@@ -127,7 +127,7 @@ int main()
 
 		life = upanddown(life);
 		getchar();
-		gold = gold1(gold, life, sub_life);
+		gold = getgold(gold, life, sub_life);
 		sub_life = life;
 	}
 
@@ -138,7 +138,7 @@ int main()
 		printf("준비가 되었다면 enter키를 눌러주세요!\n\n");
 
 		life = Timer(life);
-		gold = gold1(gold, life, sub_life);
+		gold = getgold(gold, life, sub_life);
 		sub_life = life;
 
 		printf("현재 당신의 목숨은 : %d입니다.\n", life);
