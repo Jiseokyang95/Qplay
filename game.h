@@ -1,4 +1,4 @@
-int gold1(int gold, int life, int sub_life);
+int getgold(int gold, int life, int sub_life);
 int RSP(int life);
 int question(int life);
 int Multiplication(int life);
