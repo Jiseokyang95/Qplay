@@ -1,10 +1,10 @@
 ### Qplay
-게임 이름 : Qplay
-제작 기간 : 2023.03.30 ~ 2023.04.07
-게임 목적 : 여러가지 종합게임을 구현하고, 이를 Stage별 Clear하면서 Player의 순위를 기록, 비교하는 게임
-개발 환경 : C언어, Ubuntu
-Git hub : gh repo clone Jiseokyang95/Qplay
-작 성 자 : 최종일, 박민혁, 양지석
+1. 게임 이름 : Qplay
+2. 제작 기간 : 2023.03.30 ~ 2023.04.07
+3. 게임 목적 : 여러가지 종합게임을 구현하고, 이를 Stage별 Clear하면서 Player의 순위를 기록, 비교하는 게임
+4. 개발 환경 : C언어, Ubuntu
+5. Git hub : gh repo clone Jiseokyang95/Qplay
+6. 작 성 자 : 최종일, 박민혁, 양지석
 
 ### 1) 구현 방안
 
