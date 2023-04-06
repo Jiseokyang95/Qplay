@@ -6,6 +6,105 @@
 #include <time.h>
 #include <unistd.h>
 
+#define MAX_PLAYERS 10	   // 최대 플레이어 수
+#define MAX_NAME_LENGTH 20 // 플레이어 이름 최대 길이
+
+// 플레이어 정보 구조체
+typedef struct
+{
+	char name[MAX_NAME_LENGTH];
+	int score;
+} Player;
+
+// 순위 정보 구조체
+typedef struct
+{
+	Player players[MAX_PLAYERS];
+	int num_players;
+} Leaderboard;
+
+typedef struct
+{
+	char ntmp_name[MAX_NAME_LENGTH];
+	int nTmp;
+} ntmp_Player;
+
+// 순위 정보 구조체
+typedef struct
+{
+	Player ntmp_players[MAX_PLAYERS];
+	int ntmp_num_players;
+} ntmp;
+
+// 순위 파일에서 정보를 읽어와 순위 구조체에 저장하는 함수
+void load_leaderboard(Leaderboard *leaderboard)
+{
+	FILE *fp;
+	fp = fopen("leaderboard.txt", "r");
+
+	if (fp == NULL)
+	{
+		printf("순위 파일을 열 수 없습니다.\n");
+		return;
+	}
+
+	fscanf(fp, "%d", &leaderboard->num_players);
+
+	for (int i = 0; i < leaderboard->num_players; i++)
+	{
+		fscanf(fp, "%s %d", leaderboard->players[i].name, &leaderboard->players[i].score);
+	}
+
+	fclose(fp);
+}
+
+// 순위 구조체의 정보를 파일에 저장하는 함수
+void save_leaderboard(Leaderboard leaderboard)
+{
+	FILE *fp;
+	fp = fopen("leaderboard.txt", "w");
+
+	if (fp == NULL)
+	{
+		printf("순위 파일을 열 수 없습니다.\n");
+		return;
+	}
+
+	fprintf(fp, "%d\n", leaderboard.num_players);
+
+	for (int i = 0; i < leaderboard.num_players; i++)
+	{
+		fprintf(fp, "%s %d\n", leaderboard.players[i].name, leaderboard.players[i].score);
+	}
+
+	fclose(fp);
+}
+
+// 새로운 플레이어를 순위 구조체에 추가하는 함수
+void add_player(Leaderboard *leaderboard, char *name, int score)
+{
+	if (leaderboard->num_players >= MAX_PLAYERS)
+	{
+		printf("더 이상 플레이어를 추가할 수 없습니다.\n");
+		return;
+	}
+
+	strcpy(leaderboard->players[leaderboard->num_players].name, name);
+	leaderboard->players[leaderboard->num_players].score = score;
+	leaderboard->num_players++;
+}
+
+// 순위 구조체를 출력하는 함수
+void print_leaderboard(Leaderboard leaderboard)
+{
+    printf("순위\t이름\t점수\n");
+
+    for (int i = 0; i < leaderboard.num_players; i++)
+    {
+        printf("%d\t%s\t%d\n", i + 1, leaderboard.players[i].name, leaderboard.players[i].score);
+    }
+}
+
 int main()
 {
 	/*int life; // 라이프 생각하기 위해 추가
@@ -18,7 +117,13 @@ int main()
 	int sub_life = life;
 	int gold = 0;
 	srand((unsigned)time(NULL));
-	int givegold=0;
+	int givegold = 0;
+	char name[MAX_NAME_LENGTH];
+	int score;
+
+	Leaderboard leaderboard = {0};
+	ntmp ntmp = {0};
+
 	system("clear");
 	printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n");
 	printf("■                                        ■\n");
@@ -27,6 +132,12 @@ int main()
 	printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n\n");
 	sleep(3);
 	system("clear");
+
+	load_leaderboard(&leaderboard);
+	printf("수수께기 황금 동굴을 들어가려는 당신의 이름은 : ");
+	scanf("%s", name);
+	system("clear");
+
 	printf("\n\n\n\n당신은 인생역전을 할수 있다는 소문을 듣고 큰 꿈을 가지고 황금 동굴에 도착 했습니다\n");
 	printf("준비가 되었다면 enter키를 눌러주세요!\n\n");
 	getchar();
@@ -35,6 +146,7 @@ int main()
 	getchar();
 	gold = gold1(gold, life, sub_life);
 	sub_life = life;
+	system("clear");
 
 	if (life >= 0)
 	{
@@ -42,6 +154,7 @@ int main()
 		printf("현재 당신의 황금은 : %d입니다.\n", gold);
 		printf("준비가 되었다면 enter키를 눌러주세요!\n\n");
 		getchar();
+		system("clear");
 
 		life = question(life);
 		gold = gold1(gold, life, sub_life);
@@ -54,6 +167,7 @@ int main()
 		printf("현재 당신의 황금은 : %d입니다.\n", gold);
 		printf("준비가 되었다면 enter키를 눌러주세요!\n\n");
 		getchar();
+		system("clear");
 
 		life = Multiplication(life);
 		gold = gold1(gold, life, sub_life);
@@ -66,6 +180,7 @@ int main()
 		printf("현재 당신의 황금은 : %d입니다.\n", gold);
 		printf("준비가 되었다면 enter키를 눌러주세요!\n\n");
 		getchar();
+		system("clear");
 
 		life = number_baseball(life);
 		gold = gold1(gold, life, sub_life);
@@ -78,12 +193,13 @@ int main()
 		printf("현재 당신의 황금은 : %d입니다.\n", gold);
 		printf("준비가 되었다면 enter키를 눌러주세요!\n\n");
 		getchar();
+		system("clear");
 
 		life = hangman(life);
-			getchar();
+		getchar();
 		gold = gold1(gold, life, sub_life);
-		givegold= rand()%10+1;
-		gold = gold +givegold;
+		givegold = rand() % 10 + 1;
+		gold = gold + givegold;
 		printf("인질이 당신에게 고마움의 표시로 황금을 %d 개 주었습니다.\n", givegold);
 		sub_life = life;
 	}
@@ -94,6 +210,7 @@ int main()
 		printf("현재 당신의 황금은 : %d입니다.\n", gold);
 		printf("준비가 되었다면 enter키를 눌러주세요!\n\n");
 		getchar();
+		system("clear");
 
 		life = upanddown(life);
 		getchar();
@@ -110,7 +227,6 @@ int main()
 		life = Timer(life);
 		gold = gold1(gold, life, sub_life);
 		sub_life = life;
-
 
 		printf("현재 당신의 목숨은 : %d입니다.\n", life);
 		printf("현재 당신의 황금은 : %d입니다.\n", gold);
@@ -169,10 +285,38 @@ int main()
 		break;
 	}
 
-	printf("\n\n\n게임 종료\n저희 게임을 플레이 해주셔서 감사합니다.\n최종일 , 양지석 ,박민혁 2023kosta프로젝트 완성본");
-
 	if (life < 0)
 	{
 		printf("목숨이 없어서 게임이 끝났습니다...\n");
 	}
+
+	printf("\n게임 종료\n");
+
+	score = gold;
+
+	add_player(&leaderboard, name, score);
+
+	save_leaderboard(leaderboard);
+
+	int i = 0, j = 0, nLeast = 0;
+
+	for (i = 0; i < MAX_PLAYERS; ++i) // 배열의 왼쪽부터 자리 정렬
+	{
+		nLeast = i;
+		for (j = i + 1; j < MAX_PLAYERS; ++j) // 왼쪽 한자리 정렬을 완료하기 위한 내부 반복문
+		{
+			if (leaderboard.players[nLeast].score < leaderboard.players[j].score) // 큰수부터 저장을 위해선 (<) 로 변경
+				nLeast = j;
+		}
+
+		ntmp.ntmp_players[i] = leaderboard.players[i];		// 교환 전 변수값 임시저장
+		leaderboard.players[i] = leaderboard.players[nLeast]; // 변수값 교환
+		leaderboard.players[nLeast] = ntmp.ntmp_players[i];
+	}
+	printf("\n순위표:\n");
+	print_leaderboard(leaderboard);
+
+	printf("\n저희 게임을 플레이 해주셔서 감사합니다.\n최종일 , 양지석 ,박민혁\n 2023kosta프로젝트 완성본");
+
+	return 0;
 }
