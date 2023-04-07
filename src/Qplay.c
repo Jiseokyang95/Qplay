@@ -203,7 +203,7 @@ int main()
 	}
 
 	printf("\n게임 종료\n");
-
+	getchar();
 	score = gold;
 
 	add_player(&leaderboard, name, score);
