@@ -20,7 +20,7 @@
 
 ### 2) 알고리즘
 
-![image](https://user-images.githubusercontent.com/129154638/230526388-88214c04-cf35-4b4b-a584-9842604d61fd.png)
+![image](https://user-images.githubusercontent.com/129154638/230552161-bacb5f64-95d0-4dfb-87d9-6c72b426ebc8.png)
 
 ### 3) 구현 목록
 
