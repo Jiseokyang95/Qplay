@@ -6,6 +6,8 @@
 5. Git hub : gh repo clone Jiseokyang95/Qplay
 6. 작 성 자 : 최종일, 박민혁, 양지석
 
+https://www.notion.so/e95ed567298541dbb07bad726296115b?v=609ab835ea864d248bbe082b0f8eaa60
+
 ### 1) 구현 방안
 
 1. 사용자가 정답을 맞출시 점수를 부여하고, 이를 통해 순위를 나타낸다.
