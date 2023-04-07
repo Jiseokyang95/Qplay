@@ -18,7 +18,11 @@
 6. 파일 입출력 함수를 이용 Player의 순위를 기록하고, 선택 정렬을 통해 시스템을 구현했다.
 7. 구현 시스템에 따라 헤더 및 소스파일을 분할하고, make파일을 통해 링크시 용이함을 지향했다.
 
-### 2) 구현 목록
+### 2) 알고리즘
+
+![image](https://user-images.githubusercontent.com/129154638/230526388-88214c04-cf35-4b4b-a584-9842604d61fd.png)
+
+### 3) 구현 목록
 
 1. 가위/바위/보 - Random() / string
 2. 객관식 퀴즈 - while()
@@ -32,10 +36,6 @@
 9. 점수 부가 시스템 - Random() / Switch case()
 
 ** if(), getchar(), system() 함수를 통해 전체적인 게임 진행을 구현함.
-
-### 3) 알고리즘
-
-![image](https://user-images.githubusercontent.com/129154638/230526388-88214c04-cf35-4b4b-a584-9842604d61fd.png)
 
 ### 4) 개선 사항
 
