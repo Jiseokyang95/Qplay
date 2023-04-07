@@ -212,7 +212,7 @@ int main()
 
 	int i = 0, j = 0, nLeast = 0;
 
-	for (i = 0; i < MAX_PLAYERS; ++i) // 배열의 왼쪽부터 자리 정렬
+	for (i = 0; i < MAX_PLAYERS; ++i) // 선택 배열의 왼쪽부터 자리 정렬
 	{
 		nLeast = i;
 		for (j = i + 1; j < MAX_PLAYERS; ++j) // 왼쪽 한자리 정렬을 완료하기 위한 내부 반복문
